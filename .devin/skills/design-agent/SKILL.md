@@ -22,6 +22,10 @@ Design Agent for UI consistency and responsive design.
 - Ensure design consistency
 - Implement responsive layouts
 - Theme support (light/dark)
+- Follow design system:
+  - Background: dark blue
+  - Accent elements: gold
+  - Text: white
 
 ## Documentation
 - Shadcn UI: https://ui.shadcn.com/

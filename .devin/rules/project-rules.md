@@ -20,6 +20,8 @@ Follow the structure defined in [Structure.md](../../Plans/Structure.md):
 - Follow TypeScript strict mode
 - No comments unless absolutely necessary (remove if accidentally added)
 - Write compact code - collapse duplicate else branches, avoid unnecessary nesting
+- All comments must be in English
+- Keep comments to minimum
 
 ### 5. Error Handling
 - Implement centralized error handling in all services
