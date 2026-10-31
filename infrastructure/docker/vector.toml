@@ -1,0 +1,23 @@
+[sources.docker_logs]
+type = "docker_logs"
+
+[transforms.parse_logs]
+type = "remap"
+inputs = ["docker_logs"]
+source = '''
+  . = parse_json!(.message) ?? .message
+'''
+
+[sinks.kafka]
+type = "kafka"
+inputs = ["parse_logs"]
+bootstrap_servers = "kafka:9092"
+topic = "logs"
+encoding.codec = "json"
+
+[sinks.loki]
+type = "loki"
+inputs = ["parse_logs"]
+endpoint = "http://loki:3100"
+encoding.codec = "json"
+labels.app = "{{ container_name }}"

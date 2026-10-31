@@ -1,0 +1,14 @@
+{
+  "name": "auth-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "database.hostname": "postgres-auth",
+    "database.port": "5432",
+    "database.user": "postgres",
+    "database.password": "postgres",
+    "database.dbname": "auth",
+    "topic.prefix": "auth",
+    "plugin.name": "pgoutput",
+    "table.include.list": "public.users,public.sessions"
+  }
+}

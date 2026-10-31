@@ -1,0 +1,34 @@
+{
+  "dashboard": {
+    "title": "VLR Finance Services",
+    "panels": [
+      {
+        "title": "Service Status",
+        "targets": [
+          {
+            "expr": "up"
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "title": "Request Rate",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total[5m])"
+          }
+        ],
+        "type": "graph"
+      },
+      {
+        "title": "Error Rate",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total{status=~\"5..\"}[5m])"
+          }
+        ],
+        "type": "graph"
+      }
+    ]
+  }
+}

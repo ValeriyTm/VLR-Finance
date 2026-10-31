@@ -1,0 +1,14 @@
+{
+  "name": "portfolio-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "database.hostname": "postgres-portfolio",
+    "database.port": "5432",
+    "database.user": "postgres",
+    "database.password": "postgres",
+    "database.dbname": "portfolio",
+    "topic.prefix": "portfolio",
+    "plugin.name": "pgoutput",
+    "table.include.list": "public.transactions"
+  }
+}

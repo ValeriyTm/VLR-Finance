@@ -1,0 +1,14 @@
+{
+  "name": "ai-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "database.hostname": "postgres-ai",
+    "database.port": "5432",
+    "database.user": "postgres",
+    "database.password": "postgres",
+    "database.dbname": "ai",
+    "topic.prefix": "ai",
+    "plugin.name": "pgoutput",
+    "table.include.list": "public.documents,public.memories"
+  }
+}
