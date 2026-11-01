@@ -1,0 +1,20 @@
+services:
+  background-jobs-service:
+    build:
+      context: ../../apps/background-jobs-service
+      dockerfile: ../../infrastructure/docker/Dockerfile.nestjs
+    container_name: vlr-background-jobs-service
+    ports:
+      - "3009:3000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres-portfolio:5432/portfolio
+      REDIS_URL: redis://redis:6379
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    networks:
+      - vlr-network
+    depends_on:
+      - postgres-portfolio
+      - redis
+      - minio

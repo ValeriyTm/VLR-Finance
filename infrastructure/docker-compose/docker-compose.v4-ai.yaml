@@ -1,0 +1,38 @@
+services:
+  ai-copilot-service:
+    build:
+      context: ../../apps/ai-copilot-service
+      dockerfile: ../../infrastructure/docker/Dockerfile.nestjs
+    container_name: vlr-ai-copilot-service
+    ports:
+      - "3007:3000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres-ai:5432/ai
+      REDIS_URL: redis://redis:6379
+      KAFKA_BROKERS: kafka:29092
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
+      OLLAMA_URL: http://host.docker.internal:11434
+      MEM0_URL: http://mem0:8080
+      LANGFUSE_PUBLIC_KEY: ${LANGFUSE_PUBLIC_KEY}
+      LANGFUSE_SECRET_KEY: ${LANGFUSE_SECRET_KEY}
+    networks:
+      - vlr-network
+    depends_on:
+      - postgres-ai
+      - redis
+      - kafka
+      - rabbitmq
+
+  ai-copilot-mf:
+    build:
+      context: ../../apps/ai-copilot-mf
+      dockerfile: ../../infrastructure/docker/Dockerfile.nextjs
+    container_name: vlr-ai-copilot-mf
+    ports:
+      - "3008:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:80/api/ai
+    networks:
+      - vlr-network
+    depends_on:
+      - ai-copilot-service

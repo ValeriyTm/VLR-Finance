@@ -47,3 +47,6 @@ coverage/
 
 # OpenSpec
 .openspec/
+
+# Personal
+VLR-examples/

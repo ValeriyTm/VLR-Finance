@@ -1,0 +1,29 @@
+services:
+  ingestor-service:
+    build:
+      context: ../../apps/ingestor-service
+      dockerfile: ../../infrastructure/docker/Dockerfile.nestjs
+    container_name: vlr-ingestor-service
+    ports:
+      - "3003:3000"
+    environment:
+      KAFKA_BROKERS: kafka:29092
+    networks:
+      - vlr-network
+    depends_on:
+      - kafka
+
+  terminal-mf:
+    build:
+      context: ../../apps/terminal-mf
+      dockerfile: ../../infrastructure/docker/Dockerfile.nextjs
+    container_name: vlr-terminal-mf
+    ports:
+      - "3004:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:80/api/ingestor
+      NEXT_PUBLIC_WS_URL: ws://localhost:80
+    networks:
+      - vlr-network
+    depends_on:
+      - ingestor-service
