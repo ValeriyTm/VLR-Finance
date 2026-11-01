@@ -461,18 +461,20 @@ infrastructure/
 
 ### Requirements
 - Docker
-- Node.js
-- pnpm
-- Ollama (already running on localhost:11434)
+- Node.js >= 18
+- pnpm >= 8
+- Ollama (running on localhost:11434 for AI features)
 
-### Running Verticals
+### Infrastructure Setup
 
-**Base services**:
+The project uses Docker Compose for local development. Infrastructure is organized into verticals to allow incremental development.
+
+**Base Services** (databases, message brokers, observability):
 ```bash
 docker-compose -f infrastructure/docker-compose/docker-compose.base.yaml up -d
 ```
 
-**Vertical 1 (Auth)**:
+**Vertical 1 (Auth & Profile)**:
 ```bash
 docker-compose -f infrastructure/docker-compose/docker-compose.base.yaml \
   -f infrastructure/docker-compose/docker-compose.v1-auth.yaml up -d
@@ -484,29 +486,85 @@ docker-compose -f infrastructure/docker-compose/docker-compose.base.yaml \
   -f infrastructure/docker-compose/docker-compose.v2-terminal.yaml up -d
 ```
 
-**Vertical 3 (Portfolio)**:
+**Vertical 3 (Portfolio & Analytics)**:
 ```bash
 docker-compose -f infrastructure/docker-compose/docker-compose.base.yaml \
   -f infrastructure/docker-compose/docker-compose.v3-portfolio.yaml up -d
 ```
 
-**Vertical 4 (AI)**:
+**Vertical 4 (AI Copilot)**:
 ```bash
 docker-compose -f infrastructure/docker-compose/docker-compose.base.yaml \
   -f infrastructure/docker-compose/docker-compose.v4-ai.yaml up -d
 ```
 
-**Vertical 5 (Jobs)**:
+**Vertical 5 (Background Jobs)**:
 ```bash
 docker-compose -f infrastructure/docker-compose/docker-compose.base.yaml \
   -f infrastructure/docker-compose/docker-compose.v5-jobs.yaml up -d
 ```
 
-**All services**:
+**All Services**:
 ```bash
 docker-compose -f infrastructure/docker-compose/docker-compose.base.yaml \
   -f infrastructure/docker-compose/docker-compose.full.yaml up -d
 ```
+
+### Service URLs
+
+After starting the base services, access the following URLs:
+
+- **Nginx API Gateway**: http://localhost
+- **Grafana**: http://localhost:3000 (admin/admin)
+- **Prometheus**: http://localhost:9090
+- **MinIO Console**: http://localhost:9001 (minioadmin/minioadmin)
+- **RabbitMQ Management**: http://localhost:15672 (guest/guest)
+- **ksqDB UI**: http://localhost:8088
+
+### Database Migrations
+
+**PostgreSQL** (via Prisma):
+```bash
+# Auth database
+cd apps/auth-service
+pnpm prisma migrate dev
+
+# Portfolio database
+cd apps/portfolio-service
+pnpm prisma migrate dev
+
+# AI database
+cd apps/ai-copilot-service
+pnpm prisma migrate dev
+```
+
+**ClickHouse**:
+```bash
+docker exec vlr-clickhouse /docker-entrypoint-initdb.d/init-clickhouse.sh
+```
+
+### Troubleshooting
+
+**Containers won't start**:
+- Check Docker is running: `docker ps`
+- Check port conflicts: services use ports 80, 3000-3009, 5432-5434, 6379, 8123, 9000-9001, 9090, 9092, 15672, 3100, 3200, 4318, 8083, 8088
+- Check logs: `docker-compose logs <service-name>`
+
+**Database connection errors**:
+- Verify DATABASE_URL in .env matches docker-compose configuration
+- Check PostgreSQL containers are healthy: `docker-compose ps`
+
+**Kafka/ksqDB issues**:
+- Kafka runs in KRaft mode (no Zookeeper needed)
+- Wait for Kafka to fully start before running ksqlDB commands
+- Check Kafka UI if enabled: http://localhost:8080
+
+**MinIO bucket creation**:
+- Access MinIO console at http://localhost:9001
+- Create buckets manually: reports, logs, assets
+- Or run minio-init container: `docker-compose up minio-init`
+
+### Running Verticals
 
 ---
 
