@@ -465,40 +465,6 @@ infrastructure/
 - pnpm >= 9.0.0
 - Ollama (running on localhost:11434 for AI features)
 
-### Version Requirements (November 2026)
-
-This project uses modern library versions as of November 2026:
-
-**Core:**
-- Node.js: >= 22.0.0
-- TypeScript: ^5.7.0
-- pnpm: >= 9.0.0
-
-**Backend (NestJS):**
-- NestJS: ^12.0.0
-- @nestjs/jwt: ^11.0.0
-- @nestjs/throttler: ^6.0.0
-- @nestjs/swagger: ^8.0.0
-- passport: ^0.8.0
-- passport-jwt: ^5.0.0
-
-**Database:**
-- Prisma: ^7.0.0 (strictly required)
-- PostgreSQL: latest
-
-**Security:**
-- argon2: ^0.40.0
-- helmet: ^8.0.0
-- class-validator: ^0.15.0
-- class-transformer: ^0.6.0
-
-**Validation:**
-- zod: ^3.24.0
-
-**Testing:**
-- jest: ^30.0.0
-- eslint: ^9.0.0
-
 ### Infrastructure Setup
 
 The project uses Docker Compose for local development. Infrastructure is organized into verticals to allow incremental development.
@@ -555,27 +521,6 @@ After starting the base services, access the following URLs:
 - **RabbitMQ Management**: http://localhost:15672 (guest/guest)
 - **ksqDB UI**: http://localhost:8088
 
-### Database Migrations
-
-**PostgreSQL** (via Prisma):
-```bash
-# Auth database
-cd apps/auth-service
-pnpm prisma migrate dev
-
-# Portfolio database
-cd apps/portfolio-service
-pnpm prisma migrate dev
-
-# AI database
-cd apps/ai-copilot-service
-pnpm prisma migrate dev
-```
-
-**ClickHouse**:
-```bash
-docker exec vlr-clickhouse /docker-entrypoint-initdb.d/init-clickhouse.sh
-```
 
 ### Troubleshooting
 
