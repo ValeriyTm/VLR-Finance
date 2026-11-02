@@ -2,7 +2,7 @@ import { Controller, Post, Body, HttpCode, HttpStatus, UseGuards, Request } from
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiBody } from '@nestjs/swagger';
 import { Throttle } from '@nestjs/throttler';
 import { AuthService } from './auth.service';
-import { RegisterDto, LoginDto, AuthResponseDto } from './dto/auth.dto';
+import { RegisterDto, LoginDto, RefreshTokensDto, LogoutDto, AuthResponseDto } from './dto/auth.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
 @ApiTags('auth')
@@ -44,8 +44,9 @@ export class AuthController {
   @ApiOperation({ summary: 'Refresh access token using refresh token' })
   @ApiResponse({ status: 200, description: 'Token refreshed successfully' })
   @ApiResponse({ status: 401, description: 'Invalid refresh token' })
-  async refresh(@Body('refreshToken') refreshToken: string) {
-    return this.authService.refreshTokens(refreshToken);
+  @ApiBody({ type: RefreshTokensDto })
+  async refresh(@Body() refreshTokensDto: RefreshTokensDto) {
+    return this.authService.refreshTokens(refreshTokensDto.refreshToken);
   }
 
   @Post('logout')
@@ -53,8 +54,9 @@ export class AuthController {
   @ApiOperation({ summary: 'Logout current session' })
   @ApiResponse({ status: 200, description: 'Logout successful' })
   @ApiResponse({ status: 401, description: 'Invalid refresh token' })
-  async logout(@Body('refreshToken') refreshToken: string) {
-    await this.authService.logout(refreshToken);
+  @ApiBody({ type: LogoutDto })
+  async logout(@Body() logoutDto: LogoutDto) {
+    await this.authService.logout(logoutDto.refreshToken);
     return { message: 'Logged out successfully' };
   }
 

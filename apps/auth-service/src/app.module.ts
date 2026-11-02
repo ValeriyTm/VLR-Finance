@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { APP_FILTER } from '@nestjs/core';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { SessionsModule } from './sessions/sessions.module';
+import { PrismaModule } from './prisma/prisma.module';
+import { GlobalExceptionFilter } from './common/filters/global-exception.filter';
 
 @Module({
   imports: [
@@ -15,7 +18,6 @@ import { SessionsModule } from './sessions/sessions.module';
           'DATABASE_URL',
           'JWT_ACCESS_SECRET',
           'JWT_REFRESH_SECRET',
-          'REDIS_URL',
         ];
         
         for (const varName of requiredVars) {
@@ -33,9 +35,16 @@ import { SessionsModule } from './sessions/sessions.module';
         limit: 10, // 10 requests per minute
       },
     ]),
+    PrismaModule,
     AuthModule,
     UsersModule,
     SessionsModule,
+  ],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: GlobalExceptionFilter,
+    },
   ],
 })
 export class AppModule {}

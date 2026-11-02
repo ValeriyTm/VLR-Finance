@@ -25,7 +25,7 @@ This is a greenfield service implementation. The auth-service will be the first 
 
 ### Framework: NestJS
 
-**Decision:** Use NestJS framework for auth-service.
+**Decision:** Use NestJS framework for auth-service with modern versions (November 2026).
 
 **Rationale:**
 - Built-in support for decorators, pipes, guards, and modules
@@ -33,6 +33,16 @@ This is a greenfield service implementation. The auth-service will be the first 
 - Easy integration with OpenAPI/Swagger
 - Consistent with other microservices in the architecture
 - Built-in validation with class-validator and class-transformer
+
+**Versions (November 2026):**
+- NestJS: ^12.0.0
+- @nestjs/jwt: ^11.0.0
+- @nestjs/throttler: ^6.0.0
+- @nestjs/swagger: ^8.0.0
+- passport: ^0.8.0
+- passport-jwt: ^5.0.0
+- argon2: ^0.40.0
+- TypeScript: ^5.7.0
 
 **Alternatives Considered:**
 - **Express.js:** More boilerplate, less structured

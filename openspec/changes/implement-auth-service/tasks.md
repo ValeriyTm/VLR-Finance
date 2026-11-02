@@ -2,27 +2,27 @@
 
 ## 1. Project Structure Setup
 
-- [ ] 1.1 Create auth-service directory in apps/ with NestJS structure
-- [ ] 1.2 Initialize NestJS project with pnpm create nest-app
-- [ ] 1.3 Configure tsconfig.json and nest-cli.json
-- [ ] 1.4 Create module structure (auth, users, sessions modules)
-- [ ] 1.5 Add required dependencies (class-validator, class-transformer, @nestjs/throttler, @nestjs/jwt, @nestjs/passport, argon2, prisma, bcrypt)
+- [x] 1.1 Create auth-service directory in apps/ with NestJS structure
+- [x] 1.2 Initialize NestJS project with pnpm create nest-app
+- [x] 1.3 Configure tsconfig.json and nest-cli.json
+- [x] 1.4 Create module structure (auth, users, sessions modules)
+- [x] 1.5 Add required dependencies (class-validator, class-transformer, @nestjs/throttler, @nestjs/jwt, @nestjs/passport, argon2, prisma)
 
 ## 2. Database Setup
 
-- [ ] 2.1 Copy Prisma schema from infrastructure/migrations/postgres/auth
-- [ ] 2.2 Install Prisma Client and initialize Prisma
+- [x] 2.1 Copy Prisma schema from infrastructure/migrations/postgres/auth
+- [x] 2.2 Install Prisma Client and initialize Prisma
 - [ ] 2.3 Run Prisma generate to generate client
 - [ ] 2.4 Create initial migration
-- [ ] 2.5 Configure Prisma in NestJS with PrismaService
+- [x] 2.5 Configure Prisma in NestJS with PrismaService
 
 ## 3. Shared Schemas Package
 
-- [ ] 3.1 Create packages/schemas directory if not exists
-- [ ] 3.2 Create auth Zod schemas (RegisterDto, LoginDto, UserDto, SessionDto)
-- [ ] 3.3 Create auth types (UserRole, etc.)
-- [ [ 3.4 Configure packages/schemas package.json
-- [ ] 3.5 Export schemas and types from index.ts
+- [x] 3.1 Create packages/schemas directory if not exists
+- [x] 3.2 Create auth Zod schemas (RegisterDto, LoginDto, UserDto, SessionDto)
+- [x] 3.3 Create auth types (UserRole, etc.)
+- [x] 3.4 Configure packages/schemas package.json
+- [x] 3.5 Export schemas and types from index.ts
 
 ## 4. User Module
 

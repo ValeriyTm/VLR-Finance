@@ -419,6 +419,25 @@ skill invoke api-docs-agent
 - Уточнить инструкцию в skill
 - Запустить агента снова
 
+### Версии библиотек (ноябрь 2026)
+Все агенты должны использовать современные версии библиотек:
+- NestJS: ^12.0.0
+- TypeScript: ^5.7.0
+- Node.js: >= 22.0.0
+- Prisma: ^7.0.0 (обязательно)
+- @nestjs/jwt: ^11.0.0
+- @nestjs/throttler: ^6.0.0
+- @nestjs/swagger: ^8.0.0
+- passport: ^0.8.0
+- passport-jwt: ^5.0.0
+- argon2: ^0.40.0
+- class-validator: ^0.15.0
+- class-transformer: ^0.6.0
+- zod: ^3.24.0
+- helmet: ^8.0.0
+- eslint: ^9.0.0
+- jest: ^30.0.0
+
 ---
 
 ## Обновление этого файла

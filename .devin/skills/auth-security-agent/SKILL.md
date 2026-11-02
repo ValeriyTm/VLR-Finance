@@ -85,14 +85,31 @@ You are the Auth/Security Agent responsible for authentication, authorization, a
 - [KeyDecisions.md](../../openspec/specs/KeyDecisions.md) - Security decisions
 
 ## Tech Stack
-- NestJS
-- @nestjs/jwt
-- @nestjs/throttler
-- @nestjs/swagger
-- Argon2
-- Prisma ORM
+- NestJS ^12.0.0
+- @nestjs/jwt ^11.0.0
+- @nestjs/throttler ^6.0.0
+- @nestjs/swagger ^8.0.0
+- Argon2 ^0.40.0
+- Prisma ORM ^7.0.0 (required)
 - Redis
 - BullMQ
+- TypeScript ^5.7.0
+- Node.js >= 22.0.0
+
+## Version Requirements (November 2026)
+All implementations must use modern library versions as of November 2026:
+- NestJS ecosystem: v12.x
+- TypeScript: v5.7.x
+- Node.js: v22.x or higher
+- Prisma: v7.x (strictly required)
+- passport: v0.8.x
+- passport-jwt: v5.0.x
+- class-validator: v0.15.x
+- class-transformer: v0.6.x
+- zod: v3.24.x
+- helmet: v8.0.x
+- eslint: v9.0.x
+- jest: v30.0.x
 
 ## Constraints
 - Follow Security for AI Ultimate.md strictly
