@@ -2,10 +2,13 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { APP_FILTER } from '@nestjs/core';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { SessionsModule } from './sessions/sessions.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { RedisModule } from './redis/redis.module';
 import { GlobalExceptionFilter } from './common/filters/global-exception.filter';
 
 @Module({
@@ -35,7 +38,18 @@ import { GlobalExceptionFilter } from './common/filters/global-exception.filter'
         limit: 10, // 10 requests per minute
       },
     ]),
+    ClientsModule.register([
+      {
+        name: 'AUTH_PACKAGE',
+        transport: Transport.GRPC,
+        options: {
+          package: 'auth',
+          protoPath: join(__dirname, '../../proto/auth/auth.proto'),
+        },
+      },
+    ]),
     PrismaModule,
+    RedisModule,
     AuthModule,
     UsersModule,
     SessionsModule,

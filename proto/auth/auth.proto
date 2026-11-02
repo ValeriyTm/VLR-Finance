@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package auth;
+
+service AuthService {
+  // Validate user tariff and decrement business limits
+  // Called by AI Copilot Service to check user premium status and limits
+  rpc ValidateUserTariff(ValidateUserTariffRequest) returns (ValidateUserTariffResponse);
+}
+
+message ValidateUserTariffRequest {
+  string access_token = 1;  // JWT access token
+  string user_id = 2;       // User ID (optional, extracted from token if not provided)
+}
+
+message ValidateUserTariffResponse {
+  bool is_valid = 1;           // Whether the token is valid
+  string user_id = 2;          // User ID
+  string role = 3;             // User role (USER, PREMIUM, ADMIN)
+  map<string, int32> remaining_limits = 4;  // Remaining business limits per resource type
+  string error_message = 5;    // Error message if validation failed
+}

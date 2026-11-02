@@ -2,12 +2,15 @@ services:
   auth-service:
     build:
       context: ../../apps/auth-service
-      dockerfile: ../../infrastructure/docker/Dockerfile.nestjs
+      dockerfile: Dockerfile
     container_name: vlr-auth-service
     ports:
-      - "3001:3000"
+      - "3001:3001"
     environment:
       DATABASE_URL: postgresql://postgres:postgres@postgres-auth:5432/auth
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET:-your-super-secret-access-key-change-in-production}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:-your-super-secret-refresh-key-change-in-production}
+      ALLOWED_ORIGINS: http://localhost:3000,http://localhost:3001,http://localhost:3002
       REDIS_URL: redis://redis:6379
       KAFKA_BROKERS: kafka:29092
       RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
