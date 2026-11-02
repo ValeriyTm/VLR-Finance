@@ -114,3 +114,4 @@ export type User = z.infer<typeof userSchema>;
 export type Session = z.infer<typeof sessionSchema>;
 export type Tokens = z.infer<typeof tokensSchema>;
 export type AuthResponse = z.infer<typeof authResponseSchema>;
+

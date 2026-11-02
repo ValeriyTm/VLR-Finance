@@ -2,12 +2,18 @@ services:
   ingestor-service:
     build:
       context: ../../apps/ingestor-service
-      dockerfile: ../../infrastructure/docker/Dockerfile.nestjs
+      dockerfile: Dockerfile
     container_name: vlr-ingestor-service
     ports:
-      - "3003:3000"
+      - "3003:3003"
     environment:
       KAFKA_BROKERS: kafka:29092
+      MOCK_STRATEGY: "true"
+      SYMBOLS: btcusdt,ethusdt
+      MOCK_INTERVAL: 1000
+      BINANCE_WS_URL: wss://stream.binance.com:9443/ws
+      MAX_RECONNECT_ATTEMPTS: 10
+      RECONNECT_INTERVAL: 5000
     networks:
       - vlr-network
     depends_on:
