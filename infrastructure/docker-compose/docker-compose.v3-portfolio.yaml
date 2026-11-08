@@ -2,22 +2,34 @@ services:
   portfolio-service:
     build:
       context: ../../apps/portfolio-service
-      dockerfile: ../../infrastructure/docker/Dockerfile.nestjs
+      dockerfile: Dockerfile
     container_name: vlr-portfolio-service
     ports:
-      - "3005:3000"
+      - "3005:3005"
     environment:
       DATABASE_URL: postgresql://postgres:postgres@postgres-portfolio:5432/portfolio
       REDIS_URL: redis://redis:6379
       KAFKA_BROKERS: kafka:29092
-      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
     networks:
       - vlr-network
     depends_on:
       - postgres-portfolio
       - redis
       - kafka
-      - rabbitmq
+
+  analytics-service:
+    build:
+      context: ../../apps/analytics-service
+      dockerfile: Dockerfile
+    container_name: vlr-analytics-service
+    ports:
+      - "3006:3005"
+    environment:
+      CLICKHOUSE_URL: http://clickhouse:8123
+    networks:
+      - vlr-network
+    depends_on:
+      - clickhouse
 
   portfolio-mf:
     build:
@@ -25,10 +37,11 @@ services:
       dockerfile: ../../infrastructure/docker/Dockerfile.nextjs
     container_name: vlr-portfolio-mf
     ports:
-      - "3006:3000"
+      - "3007:3000"
     environment:
       NEXT_PUBLIC_API_URL: http://localhost:80/api/portfolio
     networks:
       - vlr-network
     depends_on:
       - portfolio-service
+      - analytics-service
