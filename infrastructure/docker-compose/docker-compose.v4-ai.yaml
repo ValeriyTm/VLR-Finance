@@ -22,10 +22,10 @@ services:
   ai-copilot-mf:
     build:
       context: ../../apps/ai-copilot-mf
-      dockerfile: ../../infrastructure/docker/Dockerfile.nextjs
+      dockerfile: Dockerfile
     container_name: vlr-ai-copilot-mf
     ports:
-      - "3008:3000"
+      - "3008:3008"
     environment:
       NEXT_PUBLIC_API_URL: http://localhost:80/api/ai
     networks:

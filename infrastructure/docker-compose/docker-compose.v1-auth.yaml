@@ -25,10 +25,10 @@ services:
   auth-profile-mf:
     build:
       context: ../../apps/auth-profile-mf
-      dockerfile: ../../infrastructure/docker/Dockerfile.nextjs
+      dockerfile: Dockerfile
     container_name: vlr-auth-profile-mf
     ports:
-      - "3002:3000"
+      - "3002:3002"
     environment:
       NEXT_PUBLIC_API_URL: http://localhost:80/api/auth
     networks:

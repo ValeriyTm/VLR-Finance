@@ -1,0 +1,12 @@
+services:
+  host:
+    build:
+      context: ../../apps/host
+      dockerfile: Dockerfile
+    container_name: vlr-host
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:80/api
+    networks:
+      - vlr-network

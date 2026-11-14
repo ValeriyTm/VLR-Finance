@@ -22,10 +22,10 @@ services:
   terminal-mf:
     build:
       context: ../../apps/terminal-mf
-      dockerfile: ../../infrastructure/docker/Dockerfile.nextjs
+      dockerfile: Dockerfile
     container_name: vlr-terminal-mf
     ports:
-      - "3004:3000"
+      - "3004:3004"
     environment:
       NEXT_PUBLIC_API_URL: http://localhost:80/api/ingestor
       NEXT_PUBLIC_WS_URL: ws://localhost:80

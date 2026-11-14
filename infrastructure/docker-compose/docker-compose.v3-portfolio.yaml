@@ -34,10 +34,10 @@ services:
   portfolio-mf:
     build:
       context: ../../apps/portfolio-mf
-      dockerfile: ../../infrastructure/docker/Dockerfile.nextjs
+      dockerfile: Dockerfile
     container_name: vlr-portfolio-mf
     ports:
-      - "3007:3000"
+      - "3007:3006"
     environment:
       NEXT_PUBLIC_API_URL: http://localhost:80/api/portfolio
     networks:
