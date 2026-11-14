@@ -2,10 +2,10 @@ services:
   background-jobs-service:
     build:
       context: ../../apps/background-jobs-service
-      dockerfile: ../../infrastructure/docker/Dockerfile.nestjs
+      dockerfile: Dockerfile
     container_name: vlr-background-jobs-service
     ports:
-      - "3009:3000"
+      - "3009:3009"
     environment:
       DATABASE_URL: postgresql://postgres:postgres@postgres-portfolio:5432/portfolio
       REDIS_URL: redis://redis:6379
