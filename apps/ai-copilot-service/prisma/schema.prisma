@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Enable pgvector extension
+// Run: CREATE EXTENSION IF NOT EXISTS vector;
+
+model Document {
+  id        String   @id @default(uuid())
+  userId    String
+  filename  String
+  content   String   @db.Text
+  embedding Unsupported("vector(768)")?
+  metadata  Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([createdAt])
+  @@map("documents")
+}
+
+model Memory {
+  id        String   @id @default(uuid())
+  userId    String
+  fact      String   @db.Text
+  category  String?
+  confidence Float    @default(0.5)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([category])
+  @@map("memories")
+}
+
+model ChatSession {
+  id        String   @id @default(uuid())
+  userId    String
+  messages  Json     @default("[]")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@map("chat_sessions")
+}
