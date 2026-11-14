@@ -18,12 +18,12 @@
 
 ## 3. Shared Schemas for AI
 
-- [ ] 3.1 Add AI Zod schemas to packages/schemas
-- [ ] 3.2 Create ChatRequest schema
-- [ ] 3.3 Create ChatResponse schema
-- [ ] 3.4 Create Document schema for RAG
-- [ ] 3.5 Create Memory schema for Mem0
-- [ ] 3.6 Export schemas from packages/schemas
+- [x] 3.1 Add AI Zod schemas to packages/schemas
+- [x] 3.2 Create ChatRequest schema
+- [x] 3.3 Create ChatResponse schema
+- [x] 3.4 Create Document schema for RAG
+- [x] 3.5 Create Memory schema for Mem0
+- [x] 3.6 Export schemas from packages/schemas
 
 ## 4. Ollama Integration
 
@@ -54,20 +54,20 @@
 
 ## 7. Mem0 Integration
 
-- [ ] 7.1 Create Mem0Service for long-term memory
-- [ ] 7.2 Implement fact extraction
-- [ ] 7.3 Implement fact storage in Mem0
-- [ ] 7.4 Implement fact retrieval
-- [ ] 7.5 Implement async memory update after response
-- [ ] 7.6 Configure Mem0 Docker container connection
+- [x] 7.1 Create Mem0Service for long-term memory
+- [x] 7.2 Implement fact extraction
+- [x] 7.3 Implement fact storage in Mem0
+- [x] 7.4 Implement fact retrieval
+- [x] 7.5 Implement async memory update after response
+- [x] 7.6 Configure Mem0 Docker container connection
 
 ## 8. gRPC Auth Integration
 
-- [ ] 8.1 Create proto/ai/ai.proto for AI service
-- [ ] 8.2 Create AuthGrpcClient for Auth Service integration
-- [ ] 8.3 Implement ValidateUserTariff call
-- [ ] 8.4 Implement limit checking and decrementing
-- [ ] 8.5 Configure gRPC in app module
+- [x] 8.1 Create proto/ai/ai.proto for AI service
+- [x] 8.2 Create AuthGrpcClient for Auth Service integration
+- [x] 8.3 Implement ValidateUserTariff call
+- [x] 8.4 Implement limit checking and decrementing
+- [x] 8.5 Configure gRPC in app module
 
 ## 9. SSE Streaming
 
@@ -88,12 +88,12 @@
 
 ## 11. Langfuse Integration
 
-- [ ] 11.1 Create LangfuseService for observability
-- [ ] 11.2 Implement trace creation
-- [ ] 11.3 Implement step logging for LangGraph
-- [ ] 11.4 Implement LLM call logging
-- [ ] 11.5 Implement embedding logging
-- [ ] 11.6 Configure Langfuse Cloud API keys
+- [x] 11.1 Create LangfuseService for observability
+- [x] 11.2 Implement trace creation
+- [x] 11.3 Implement step logging for LangGraph
+- [x] 11.4 Implement LLM call logging
+- [x] 11.5 Implement embedding logging
+- [x] 11.6 Configure Langfuse Cloud API keys
 
 ## 12. Health Check
 

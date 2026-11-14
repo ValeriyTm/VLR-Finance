@@ -8,6 +8,8 @@ import { PrismaModule } from './prisma/prisma.module';
 import { OllamaModule } from './ollama/ollama.module';
 import { LangGraphModule } from './langgraph/langgraph.module';
 import { RAGModule } from './rag/rag.module';
+import { MemoryModule } from './memory/memory.module';
+import { LangfuseModule } from './langfuse/langfuse.module';
 
 @Module({
   imports: [
@@ -18,6 +20,8 @@ import { RAGModule } from './rag/rag.module';
     OllamaModule,
     LangGraphModule,
     RAGModule,
+    MemoryModule,
+    LangfuseModule,
     ChatModule,
     ClientsModule.register([
       {
